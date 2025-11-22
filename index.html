@@ -1,0 +1,1424 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>تيلا — سوق الاستثمار العقاري</title>
+
+  <!-- خط عربي -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root{
+      --bg:#071427;
+      --panel:#071018;
+      --muted:#9aa7b2;
+      --accent:#d8b25a; /* ذهبي */
+      --glass: rgba(255,255,255,0.03);
+      --card:#08121a;
+      --radius:14px;
+      --max-width:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Cairo',system-ui,-apple-system,'Segoe UI',Roboto,Arial;
+      background: radial-gradient(ellipse at top, rgba(0,0,0,0.3), transparent 40%), linear-gradient(180deg,var(--bg), #031019 140%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      overflow-x:hidden;
+      padding-bottom:60px;
+    }
+
+    /* page container */
+    .container{max-width:var(--max-width);margin:0 auto;padding:20px}
+
+    /* hero */
+.hero{
+  position:relative;
+  width:100vw;
+  left:50%;
+  right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+
+  min-height:520px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  border-radius:0;
+  overflow:hidden;
+
+  background:linear-gradient(180deg, #00142b 0%, #021a35 35%, #03101c 100%);
+}
+.hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image: url('images/loogoo.png');
+  background-size:cover;
+  background-position:center;
+  filter:brightness(0.38) saturate(1.1) contrast(1.1);
+  opacity:0.55;
+}
+.hero-overlay{
+  position:absolute; inset:0;
+  background:linear-gradient(
+    180deg,
+    rgba(0, 16, 32, 0.55) 0%,
+    rgba(0, 10, 25, 0.65) 40%,
+    rgba(3, 10, 16, 0.9) 100%
+  );
+  z-index:1;
+}
+    .hero-inner{position:relative;z-index:2;padding:60px 20px;max-width:1000px}
+.hero h1{
+  font-family: 'ReemKufiInk', Cairo, sans-serif;
+  font-size:58px;
+  margin:0 0 2px;
+  font-weight:normal;
+  color:transparent;
+  background:linear-gradient(90deg,#d8b25a,#c49e46);
+  -webkit-background-clip:text;
+  background-clip:text;
+  line-height:1.2;
+  direction:rtl;
+}
+    .hero p.lead{color:var(--muted);font-size:18px;margin:12px 0 22px}
+    .cta-row{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
+.btn-primary{
+  background:#041520;                 /* كحلي */
+  color:#d8b25a;                      /* كتابة ذهبية */
+  padding:12px 28px;
+  border-radius:12px;
+  border:2px solid ;           /* برواز ذهبي */
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:
+      0 0 8px ,                /* توهج خفيف */
+      0 0 14px rgba(247,220,160,0.6); /* إضاءة ناعمة */
+  transition:0.25s;
+}
+
+.btn-primary:hover{
+  background:#112544;                 
+  box-shadow:
+      0 0 12px ,
+      0 0 20px rgba(247,220,160,0.8);
+  transform:translateY(-3px);
+}
+
+.btn-primary:hover{
+  background:#112544;           /* كحلي أفتح شوية عند المرور */
+  transform:translateY(-3px);
+}
+    .btn-outline{
+      border:1px solid rgba(255,255,255,0.08);
+      color:var(--muted);padding:10px 22px;border-radius:12px;background:transparent;cursor:pointer;
+    }
+
+    /* section title */
+    .section-title{
+      text-align:center;margin:48px 0 18px;font-size:32px;color:var(--accent);font-weight:800;letter-spacing:1px;
+      text-shadow:0 4px 20px rgba(0,0,0,0.45);
+    }
+
+    /* cards grid */
+    .cards{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+      max-width:1200px;margin:0 auto;padding:0 20px;
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;border:1px solid rgba(216,178,90,0.08);
+      overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s;
+    }
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
+    .card .thumb{height:170px;background-size:cover;background-position:center}
+    .card .body{padding:14px;flex:1;display:flex;flex-direction:column;gap:8px}
+    .card .title{font-weight:800}
+    .card .meta{color:var(--muted);font-size:13px}
+    .card .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+    .badge{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--muted)}
+    .card .price{margin-top:auto;font-weight:900;color:var(--accent)}
+
+    .card-footer{display:flex;gap:8px;padding:14px;border-top:1px solid rgba(255,255,255,0.02);justify-content:space-between}
+.card .btn-small{
+  background: transparent;                 /* 🔥 خلفية شفافة */
+  border: none;                             /* بدون برواز نهائي */
+  color: #fff;                           /* الكلمة باللون الأبيض */
+  font-weight: 700;
+
+  /* 👇 التحكم الكامل */
+  padding: 5px 45px;                       /* حجم الزر (طول × عرض) */
+  font-size: 16px;                          /* حجم كلمة عرض */
+  border-radius: 10px;                      /* لو عايز الزوايا مختلفة غير الرقم */
+
+  cursor: pointer;
+  transition: 0.25s;
+
+  /* ✨ الإشعاع فقط بدون برواز */
+  box-shadow: 0 0 12px rgba(255,255,255,0.6);
+}
+
+.card .btn-small:hover{
+  box-shadow: 
+    0 0 14px rgba(255,255,255,0.8),
+    0 0 25px rgba(255,255,255,0.6);         /* إشعاع أقوى عند المرور */
+  transform: translateY(-3px);
+}
+
+.card .btn-small:hover{
+  background:rgba(247,220,160,0.15);   /* خلفية لطيفة عند المرور */
+  box-shadow:0 0 12px rgba(247,220,160,0.8);
+  transform:translateY(-3px);
+}
+    
+.card .btn-small.primary{
+  background:linear-gradient(90deg,var(--accent),#f7dca0);
+  color:#061018;
+  border:0;
+  font-weight:800;
+
+  /* 👇 تحكم كامل */
+  padding:1px 12px;   /* الطول = 10px ، العرض = 22px */
+  font-size:15px;       /* حجم الكلمة */
+  width:auto;           /* خليه ثابت أو خليه رقم مثلاً: 120px */
+  height:auto;          /* تقدر تخليه: 40px مثلاً */
+  border-radius:10px;   /* لو عايز الزوايا ناعمة */
+}
+    /* gallery */
+    .gallery{max-width:1200px;margin:36px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:0 20px}
+    .gallery .gimg{height:220px;background-size:cover;background-position:center;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+
+    /* footer */
+    footer{max-width:var(--max-width);margin:48px auto;padding:24px;color:var(--muted);text-align:center;font-size:14px}
+
+    /* popups */
+    .overlay{position:fixed;inset:0;display:none;justify-content:center;align-items:center;background:rgba(0,0,0,0.6);z-index:1200}
+    .modal{position:relative;background:linear-gradient(180deg,#071018,#07121b);border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.04);width:94%;max-width:760px;color:#fff}
+    .modal .close{position:absolute;top:-28px;left:1px;font-size:40px;cursor:pointer;color:var(--accent);z-index:2}
+    .modal .modal-grid{display:flex;gap:12px}
+    .modal img{max-width:48%;border-radius:8px;object-fit:cover}
+    .modal .modal-info{flex:1}
+    .modal .modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+
+    /* responsive */
+    @media (max-width:1000px){
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .hero h1{font-size:40px}
+    }
+    @media (max-width:640px){
+      .cards{grid-template-columns:1fr}
+      .gallery{grid-template-columns:1fr}
+      .hero{min-height:420px}
+      .hero h1{font-size:28px}
+      .hero p.lead{font-size:15px}
+      .card .thumb{height:180px}
+      .modal .modal-grid{flex-direction:column}
+      .modal img{width:100%;height:auto;max-width:100%}
+    }
+  .hero{
+  padding-bottom: 60px;
+}
+/* زر الإغلاق الجديد */
+.btn-close-fancy {
+  background: rgba(255, 255, 255, 0.06);     /* زجاجي شفاف */
+  backdrop-filter: blur(6px);               /* تأثير الزجاج */
+  color: #fff;                               /* كلمة إغلاق باللون الأبيض */
+  border: 2px solid rgba(255, 70, 70, 0.8);  /* برواز أحمر محمر */
+  box-shadow: 
+      0 0 10px rgba(255, 70, 70, 0.6),
+      0 0 16px rgba(255, 70, 70, 0.4);       /* إشعاع محمر */
+  padding: 2px 10px;                        /* تحكم كامل في الحجم */
+  font-size: 16px;                           /* تحكم في حجم الخط */
+  border-radius: 12px;                        /* زوايا ناعمة */
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+/* تأثير المرور */
+.btn-close-fancy:hover {
+  box-shadow: 
+      0 0 14px rgba(255, 70, 70, 0.9),
+      0 0 22px rgba(255, 70, 70, 0.7);
+  transform: translateY(-3px);
+}
+.btn-more-glass {
+  background:linear-gradient(90deg,var(--accent),#f7dca0);
+  color:#061018;
+  border:0;
+  font-weight:800;
+
+  /* 👇 تحكم كامل */
+  padding:8px 40px;   /* الطول = 10px ، العرض = 22px */
+  font-size:15px;       /* حجم الكلمة */
+  width:auto;           /* خليه ثابت أو خليه رقم مثلاً: 120px */
+  height:auto;          /* تقدر تخليه: 40px مثلاً */
+  border-radius:10px;   /* لو عايز الزوايا ناعمة */
+}
+.decor-title {
+  position: relative;
+  padding: 30px 0;
+}
+
+.decor-title::before,
+.decor-title::after {
+  content: "";
+  position: absolute;
+  left: 52%;
+  transform: translateX(-50%);
+  width: 270px;
+  height: 250px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.9;
+  اللون الذهبي */
+  filter: 
+    invert(53%) 
+    sepia(82%) 
+    saturate(600%) 
+    hue-rotate(10deg) 
+    brightness(90%) 
+    contrast(95%);
+}
+
+.decor-title::before,
+.decor-title::after {
+  content: "";
+  position: absolute;
+  left: 52%;
+  transform: translateX(-50%);
+  width: 270px;
+  height: 250px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.9;
+  filter:
+    invert(53%)
+    sepia(82%)
+    saturate(150%)
+    hue-rotate(1deg)
+    brightness(100%)
+    contrast(115%);
+}
+.decor-title::before { top: -76px; background-image: url('images/decor1.png'); }
+.decor-title::after  { bottom: -80px; background-image: url('images/decor2.png'); }
+  </style>
+  <!-- تحميل الخط الكوفي من مجلد fonts -->
+<style>
+@font-face {
+  font-family: 'ReemKufiInk';
+  src: url('fonts/ReemKufiInk-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.hero-logo{
+  display:block;
+  margin:0 auto 0px; /* يبعد عن العنوان شوي */
+  max-width:200px;     /* حجم مناسب للوجو */
+  height:auto;
+}
+/* معرض صور أفقي للتمرير */
+.horizontal-gallery{
+  display:flex;
+  overflow-x:auto;
+  gap:8px;
+  padding:10px 0;
+  scroll-snap-type:x mandatory;
+}
+.horizontal-gallery img{
+  width:260px;
+  height:200px;
+  object-fit:cover;
+  border-radius:10px;
+  flex-shrink:0;
+  scroll-snap-align:center;
+  border:1px solid rgba(255,255,255,0.1);
+}
+.existing-close-btn {
+  background: rgba(255, 255, 255, 0.06);     /* زجاجي شفاف */
+  backdrop-filter: blur(6px);               /* تأثير الزجاج */
+  color: #fff;                               /* كلمة إغلاق باللون الأبيض */
+  border: 2px solid rgba(255, 70, 70, 0.8);  /* برواز أحمر محمر */
+  box-shadow: 
+      0 0 10px rgba(255, 70, 70, 0.6),
+      0 0 16px rgba(255, 70, 70, 0.4);       /* إشعاع محمر */
+  padding: 2px 10px;                        /* تحكم كامل في الحجم */
+  font-size: 16px;                           /* تحكم في حجم الخط */
+  border-radius: 12px;                        /* زوايا ناعمة */
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+/* تأثير المرور */
+.existing-close-btn:hover {
+  box-shadow: 
+      0 0 14px rgba(255, 70, 70, 0.9),
+      0 0 22px rgba(255, 70, 70, 0.7);
+  transform: translateY(-3px);
+}
+.btn-whatsapp {
+  background: linear-gradient(90deg, var(--accent), #f7dca0); /* ذهبي متدرج */
+  color: #061018; /* كلمة كحلي */
+  border: 0;
+  font-weight: 800;
+  padding: 8px 40px;
+  font-size: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s;
+
+  /* إشعاع خفيف */
+  box-shadow: 0 0 8px rgba(216,178,90,0.6);
+}
+
+.btn-whatsapp:hover {
+  box-shadow: 0 0 12px rgba(216,178,90,0.8);
+  transform: translateY(-2px);
+}
+.btn-contact-form {
+  background: rgba(255, 255, 255, 0.06); /* زجاجي شفاف */
+  backdrop-filter: blur(6px);             /* تأثير الزجاج */
+  color: #fff;                             /* لون النص */
+  font-weight: 800;
+  font-size: 17px;
+  padding: 6px 100px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2); /* حدود خفيفة */
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.15); /* توهج خفيف */
+  transition: 0.25s;
+}
+
+.btn-contact-form:hover {
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.25); 
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08); /* زيادة شفافية عند المرور */
+}
+
+.btn-contact-form:hover {
+  box-shadow: 0 0 14px rgba(214,178,90,0.9);
+  transform: translateY(-2px);
+}
+/* خلفية معتمة */
+.inquiry-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* الصندوق */
+.inquiry-box {
+  background: rgba(6, 16, 28, 0.9);
+  padding: 25px;
+  border-radius: 14px;
+  width: 320px;
+  box-shadow: 0 0 15px rgba(216,178,90,0.8);
+  border: 2px solid rgba(216,178,90,0.7);
+  text-align: center;
+  color: #fff;
+}
+
+.inquiry-box h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+/* الحقول */
+.inquiry-box input,
+.inquiry-box textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 0;
+  outline: none;
+}
+
+.inquiry-box textarea {
+  height: 80px;
+}
+
+/* زر send */
+.btn-send {
+  width: 100%;
+  background: linear-gradient(90deg, #d6b15c, #f7e2a4);
+  color: #061018;
+  font-weight: 800;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(216,178,90,0.7);
+  border: 0;
+  font-size: 16px;
+}
+
+.btn-send:hover {
+  box-shadow: 0 0 12px rgba(216,178,90,0.9);
+}
+
+/* زر الإغلاق */
+.close-inquiry {
+  margin-top: 10px;
+  background: none;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 5px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+/* حاوية الحقول */
+.inquiry-box input,
+.inquiry-box textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+
+  /* خلفية زجاجية شفافة */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+
+  /* لون الخط رمادي */
+  color: #c7c7c7;
+
+  font-size: 16px;
+  outline: none;
+}
+
+/* لون الـ placeholder */
+.inquiry-box input::placeholder,
+.inquiry-box textarea::placeholder {
+  color: rgba(200, 200, 200, 0.55);
+}
+
+/* تأثير focus */
+.inquiry-box input:focus,
+.inquiry-box textarea:focus {
+  border-color: rgba(216, 178, 90, 0.55); /* ذهبي خفيف */
+  box-shadow: 0 0 8px rgba(216, 178, 90, 0.45);
+}
+.contact-box {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 28px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(216, 178, 90, 0.20);
+    backdrop-filter: blur(8px);
+    text-align: center;
+    box-shadow: 0 0 18px rgba(216, 178, 90, 0.20);
+}
+
+.contact-title {
+    color: var(--accent);
+    margin-bottom: 20px;
+    font-size: 27px;
+}
+
+.contact-icons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 18px;
+}
+
+.contact-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 15px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.03);
+    text-decoration: none;
+    color: #f7dca0;
+    border: 1px solid rgba(216,178,90,0.25);
+    transition: 0.3s ease;
+}
+
+.contact-icon i {
+    font-size: 26px;
+    color: #f7dca0;
+    transition: 0.3s ease;
+}
+
+.contact-icon:hover {
+    transform: scale(1.09);
+    background: rgba(216,178,90,0.12);
+    box-shadow: 0 0 12px rgba(216,178,90,0.5);
+}
+
+.contact-icon:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 20px rgba(255,215,135,0.9);
+}
+
+.contact-icon span {
+    font-size: 14px;
+    color: #e5cc9b;
+}
+.featured-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:26px;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.featured-card{
+  /* 🟦 خلفية زجاجية شفافة */
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:16px;
+  overflow:hidden;
+
+  /* ظل فاخر */
+  box-shadow:0 8px 22px rgba(0,0,0,0.45);
+  transition:0.25s;
+}
+
+.featured-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 14px 30px rgba(0,0,0,0.7);
+
+  /* زيادة شفافية وخلفية زجاجية أقوى */
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+}
+
+.f-thumb{
+  height:210px;
+  background-size:cover;
+  background-position:center;
+}
+
+.f-body{
+  padding:18px;
+  text-align:right;
+}
+
+.f-title{
+  margin:0;
+  font-size:20px;
+  color:#f7dca0;
+  font-weight:800;
+}
+
+.f-meta{
+  color:#9aa7b2;
+  margin:6px 0;
+}
+
+.f-desc{
+  color:#cfcfcf;
+  font-size:14px;
+  margin-bottom:12px;
+}
+
+.f-price{
+  color:var(--accent);
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:14px;
+}
+
+.f-btn{
+  background:linear-gradient(90deg,var(--accent),#f7dca0);
+  width:100%;
+  padding:10px;
+  color:#061018;
+  border:0;
+  border-radius:10px;
+  font-weight:800;
+  cursor:pointer;
+  transition:0.25s;
+}
+
+.f-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 14px rgba(216,178,90,0.6);
+}
+.card .favorite-btn,
+.featured-card .favorite-btn {
+  position:absolute;
+  top:10px;
+  left:10px;
+  font-size:20px;
+  cursor:pointer;
+  color: rgba(#fff);
+  transition: 0.25s;
+  z-index:5;
+}
+.card .favorite-btn.active,
+.featured-card .favorite-btn.active {
+  color:red;
+}
+.card, .featured-card {
+  position:relative; /* لتحديد موقع القلب */
+}
+.moving-text {
+  display: inline-block; /* ضروري للحركة */
+  position: relative;
+  animation: moveRightLeft 0s infinite alternate ease-in-out;
+}
+
+@keyframes moveRightLeft {
+  0% { left: 0; }
+  100% { left: 20px; } /* تحرك 20px يمين */
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <!-- hero -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-inner">
+<img src="images/logo.png" alt="تيلا" class="hero-logo">
+<h1>تِيلَا لِلِاسْتِثْمَارِ الْعَقَارِيِّ</h1>
+        <p class="lead">REAL-ESTATE-INVESTMENTS</p>
+        <div class="cta-row">
+<button class="btn-primary" onclick="scrollToSection('contact-box')">تواصل معنا الآن</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- available units -->
+<h2 class="section-title decor-title" style="font-size:27px;">
+  الوحدات المتاحة🏡
+</h2>
+    <section id="listings" class="cards" aria-live="polite">
+      <!-- cards injected by JS -->
+    </section>
+    <!-- Featured Units Section -->
+<section id="featured" style="
+  margin-top:60px;
+  padding:40px 20px;
+  background:none !important;
+  backdrop-filter:none !important;
+  border:none;
+">
+
+<h2 class="section-title decor-title" style="margin-bottom:35px; font-size:27px;">
+  الوحدات المميزة✨
+</h2>
+
+  <div class="featured-grid">
+<script>
+document.querySelectorAll(".featured-card").forEach(card => {
+  const id = parseInt(card.getAttribute("data-id"));
+
+  card.addEventListener("click", function(e) {
+    // منع تفعيل زر القلب إذا كان الضغط عليه
+    if (e.target.classList.contains("favorite-btn")) return;
+
+    // افتح التفاصيل
+    if (typeof openMegaDetail === "function") {
+      openMegaDetail(id);
+    } else if (typeof openDetail === "function") {
+      openDetail(id);
+    }
+  });
+});
+</script>
+    <!-- Card 1 - Villa -->
+<article class="featured-card" data-id="1">
+      <div class="f-thumb" style="background-image:url('images/5.jpg')"></div>
+      <div class="f-body">
+        <h3 class="f-title">فيلا فاخرة بحمام سباحة</h3>
+        <p class="f-meta">القاهرة — التجمع الخامس</p>
+        <p class="f-desc">فيلا راقية بمساحة واسعة وتشطيب ممتاز وحديقة خاصة.</p>
+        <div class="f-price">17,000,000 ج.م</div>
+        <button class="f-btn" onclick="contactSeller(4)">تواصل الآن</button>
+      </div>
+    </article>
+
+    <!-- Card 2 - Apartment -->
+<article class="featured-card" data-id="2">
+      <div class="f-thumb" style="background-image:url('images/myphoto.jpg')"></div>
+      <div class="f-body">
+        <h3 class="f-title">شقة 3 غرف مفروشة</h3>
+        <p class="f-meta">شرم الشيخ — النور</p>
+        <p class="f-desc">شقة راقية قريبة من البحر مجهزة بالكامل.</p>
+        <div class="f-price">850 ج.م</div>
+        <button class="f-btn" onclick="contactSeller(5)">تواصل الآن</button>
+      </div>
+    </article>
+
+    <!-- Card 3 - Land -->
+<article class="featured-card" data-id="3">
+      <div class="f-thumb" style="background-image:url('images/10.jpg')"></div>
+      <div class="f-body">
+        <h3 class="f-title">أرض مباني مميزة</h3>
+        <p class="f-meta">سوهاج — جرجا</p>
+        <p class="f-desc">أرض صالحة للبناء بموقع ممتاز & قرب الخدمات.</p>
+        <div class="f-price">48,000,000 ج.م</div>
+        <button class="f-btn" onclick="contactSeller(3)">تواصل الآن</button>
+      </div>
+    </article>
+
+  </div>
+</section>
+<!-- قسم التواصل -->
+<section id="contact-section" style="
+  margin-top:60px;
+  padding:40px 20px;
+  background:none !important;
+  border:none !important;
+  text-align:center;
+">
+
+  <!-- زر اترك استفسارك -->
+  <button class="btn-contact-form" onclick="openInquiry()" style="margin-bottom:25px;">
+    اترك استفسارك
+  </button>
+
+<!-- صندوق التواصل -->
+<div id="contact-box" class="contact-box">
+<h2 class="contact-title">
+    تواصل معنا... <span style="color: #d8b25a;">💬</span>
+</h2>
+
+    <div class="contact-icons">
+        <!-- واتساب -->
+        <a href="https://wa.me/201029207323" target="_blank" class="contact-icon">
+            <i class="fab fa-whatsapp"></i>
+            <span>whatsapp</span>
+        </a>
+
+        <!-- الهاتف -->
+        <a href="tel:01029207323" class="contact-icon">
+            <i class="fas fa-phone-alt"></i>
+            <span>call</span>
+        </a>
+
+        <!-- البريد -->
+        <a href="mailto:tilagroup1@gmail.com" class="contact-icon">
+            <i class="fas fa-envelope"></i>
+            <span>Gmail</span>
+        </a>
+
+        <!-- فيسبوك -->
+        <a href="https://facebook.com/TilaGroup" target="_blank" class="contact-icon">
+            <i class="fab fa-facebook-f"></i>
+            <span>facebook</span>
+        </a>
+        <!-- يوتيوب -->
+        <a href="https://youtube.com/@mohamedabdel_naby9142?si=XDPco1AqUEzIHLTV" target="_blank" class="contact-icon">
+            <i class="fab fa-youtube"></i>
+            <span>youtube</span>
+        </a>
+                <!-- انستجرام -->
+        <a href="https://www.instagram.com/mohamed_3bghani?igsh=YndqZjd4Nmh0aGt1" target="_blank" class="contact-icon">
+            <i class="fab fa-instagram"></i>
+            <span>instagram</span>
+        </a>
+    </div>
+</div>
+
+</section>
+  </div>
+  <!-- أيقونة قائمة المفضلة أعلى يمين الصفحة -->
+<div id="favoritesToggle" style="
+  position:fixed;top:20px;right:20px;
+  z-index:2000;cursor:pointer;font-size:28px;color:var(--accent);
+">
+  &#9776;
+</div>
+
+<!-- drawer المفضلة -->
+<div id="favoritesDrawer" style="
+  position:fixed;top:0;right:-350px;width:350px;height:100vh;
+  background:rgba(5,15,26,0.95);backdrop-filter:blur(8px);
+  box-shadow:-4px 0 18px rgba(0,0,0,0.6);
+  transition:right 0.3s ease;z-index:1999;overflow-y:auto;padding:20px;
+">
+<h3 class="moving-text" style="color:var(--accent); margin-top:30px; margin-bottom:18px; margin-right: 85px; font-size:22px;">
+  المفضلة ❤️
+</h3>
+  <div id="favoritesList" style="display:flex;flex-direction:column;gap:12px;">
+    <!-- نسخ البوكسات ستظهر هنا -->
+  </div>
+</div>
+    <footer>
+      TILA © للتسويق العقاري <span id="year"></span> — جميع الحقوق محفوظة.
+    </footer>
+
+
+  <!-- modal detail -->
+  <div id="detailModal" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document" tabindex="-1">
+      <div class="close" onclick="closeModal()">×</div>
+      <div id="modalContent">
+        <!-- injected -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // data sample
+const listings = [
+  {
+    id:4,
+    title:'برج ١٤ دور بالمعادي علي الكرنيش مباشر',
+    type:'برج',
+    trans:'بيع',
+    price:32000000,
+    city:'القاهرة',
+    area:'المعادي',
+    beds:28,
+    size:'720 م²',
+    img:'images/21.jpg',
+    desc:'برج مكون من ١٤ دور وكامل المرافق والخدمات وعدد ٢ اسانسير و٦ محلات بالدور الارضي',
+    gallery: [
+      'images/22.jpg',
+      'images/23.jpg',
+      'images/24.jpg'
+    ]
+  },
+    {
+    id:5,
+    title:'ارض زراعية تربه زرقاء',
+    type:'ارض زراعية',
+    trans:'للبيع',
+    price:48000000,
+    city:'سوهاج',
+    area:'جرجا',
+    baths:1,
+    size:'15 فدان',
+    img:'images/10.jpg',
+    desc:'ارض زراعية تربة زرقاء قريبة من طريق مصر اسوان الزراعي',
+    gallery: [
+      'images/11.jpg',
+      'images/12.jpg',
+      'images/13.jpg',
+      'images/14.jpg',
+      'images/15.jpg'
+    ]
+  },
+    {
+    id:6,
+    title:'فيلا بحمام سباحه',
+    type:'فيلا',
+    trans:'مفروش',
+    price:17000000,
+    city:'القاهرة',
+    area:'التجمع الخامس',
+    beds:6,
+    baths:1,
+    size:'450 م²',
+    img:'images/5.jpg',
+    desc:'فيلا مكزنة من ثلاثة طوابق وبحمام سباحه وجاردن',
+    gallery: [
+      'images/6.jpg',
+      'images/7.jpg',
+      'images/8.jpg',
+      'images/9.jpg'
+    ]
+  },
+    {
+    id:7,
+    title:'شقة 3 غرف مفروشة للإيجار',
+    type:'شقة',
+    trans:'مفروش',
+    price:850,
+    city:'شرم الشيخ',
+    area:'النور',
+    beds:3,
+    baths:1,
+    size:'110 م²',
+    img:'images/myphoto.jpg',
+    desc:'شقة مفروشة بالكامل قريبة من البحر.',
+    gallery: [
+      'images/1.jpg',
+      'images/2.jpg',
+      'images/3.jpg',
+      'images/4.jpg'
+    ]
+  },
+];
+
+    // util
+    function formatPrice(p){
+      if(typeof p !== 'number') return p;
+      if(p>=1000000) return p.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + ' ج.م';
+      return p + ' ج.م';
+    }
+
+function renderListings(items){
+  const container = document.getElementById('listings');
+  container.innerHTML = '';
+
+  items.forEach(l => {
+    // إنشاء بطاقة
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.setAttribute('data-id', l.id); // مهم للقلب
+
+    // محتوى البطاقة
+    card.innerHTML = `
+      <div class="thumb" style="background-image:url('${l.img}')"></div>
+      <div class="body">
+        <div class="title">${l.title}</div>
+        <div class="meta">${l.city} — ${l.area}</div>
+        <div class="badges">
+          <div class="badge">${l.type}</div>
+          <div class="badge">${l.trans}</div>
+          <div class="badge">${l.size}</div>
+          ${l.beds?`<div class="badge">${l.beds} غرف</div>`:''}
+        </div>
+        <div class="price">${formatPrice(l.price)}</div>
+      </div>
+      <div class="card-footer">
+        <button class="btn-small" onclick="openDetail(${l.id})">عرض</button>
+        <button class="btn-small primary" onclick="contactTelegram(${l.id})">تواصل معنا</button>
+      </div>
+    `;
+
+    // إضافة زر المفضلة داخل البطاقة
+    const favBtn = document.createElement('div');
+    favBtn.className = 'favorite-btn';
+    favBtn.innerHTML = '❤';
+    favBtn.onclick = (e) => {
+      e.stopPropagation();
+      toggleFavorite(l.id); // دالة المفضلة
+    };
+    card.appendChild(favBtn);
+
+    // أضف البطاقة للـ container
+    container.appendChild(card);
+  });
+}
+
+    function openDetail(id){
+      const item = listings.find(x=>x.id===id);
+      if(!item) return;
+      const modal = document.getElementById('detailModal');
+      const content = document.getElementById('modalContent');
+      content.innerHTML = `
+        <div class="modal-grid">
+          <img src="${item.img}" alt="${item.title}">
+          <div class="modal-info">
+            <h3 style="margin-top:0">${item.title}</h3>
+            <p class="meta">${item.city} — ${item.area} • ${item.size}</p>
+            <p class="muted">${item.desc}</p>
+            <p style="font-weight:900;color:var(--accent);margin-top:8px">${formatPrice(item.price)}</p>
+<div class="modal-actions">
+
+<button class="btn-more-glass" onclick="openMegaDetail(${item.id})">
+  تفاصيل أكثر
+</button>
+
+  <!-- زر إغلاق (الشكل الفخم الجديد) -->
+  <button class="btn-close-fancy" onclick="closeModal()">
+    إغلاق
+  </button>
+
+</div>
+          </div>
+        </div>
+      `;
+      modal.style.display = 'flex';
+      modal.setAttribute('aria-hidden','false');
+      // focus for accessibility
+      modal.querySelector('.modal').focus();
+    }
+    function closeModal(){ const modal = document.getElementById('detailModal'); modal.style.display='none'; modal.setAttribute('aria-hidden','true'); }
+
+    // contact (فتح واتساب كمثال)
+function contactSeller(id){
+  const item = listings.find(x=>x.id===id);
+  if(!item) return;
+
+  const phone = '201029207323'; // رقم الواتساب بدون صفر البداية (مع 2+)
+  const message = `مرحبا...👋%0Aهل يمكنني حجز الوحدة السكنية المعروضة صاحبة المواصفات التاليه:-%0A- ${item.title}%0A- المدينة: ${item.city}%0A- المنطقة: ${item.area}%0A- المساحة: ${item.size}%0A- عدد الغرف: ${item.beds}%0A- عدد الحمامات: ${item.baths}%0A- السعر: ${formatPrice(item.price)}`;
+
+  window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+}
+
+function openMegaDetail(id){
+  const item = listings.find(x=>x.id===id);
+  if(!item) return;
+
+  const imgs = [
+    'images/lo.png',
+    'images/log.png',
+    'images/loogo.png',
+    'images/llo.png'
+  ];
+
+  const galleryHTML = imgs.map(src=>`<img src="${src}" alt="">`).join('');
+
+  const modal = document.getElementById('detailModal');
+  const content = document.getElementById('modalContent');
+
+  content.innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:12px">
+
+<div class="horizontal-gallery">
+  ${galleryHTML}
+</div>
+
+<div style="text-align:right">
+  <h3 style="margin:6px 0;color:var(--accent)">${item.title}</h3>
+  <p class="muted">${item.desc}</p>
+  <p style="font-weight:900;color:var(--accent)">${formatPrice(item.price)}</p>
+
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px">
+<button class="btn-whatsapp" onclick="contactSeller(${item.id})">احجز وحدتك</button>
+<div class="modal-content">
+<button class="existing-close-btn" onclick="closeModal()">إغلاق</button>
+  </div>
+</div>
+
+    </div>
+  `;
+
+  modal.style.display='flex';
+  modal.setAttribute('aria-hidden','false');
+}
+
+    // init
+    document.getElementById('year').textContent = new Date().getFullYear();
+    renderListings(listings);
+
+    // helper scroll
+    function scrollToSection(id){ const el=document.getElementById(id); if(!el) return; window.scrollTo({top:el.offsetTop-20,behavior:'smooth'}); }
+    // التعامل مع أي زر إغلاق جديد داخل المودال
+document.addEventListener('click', function(e){
+  if(e.target.classList.contains('btn-close-fancy')){
+    closeModal();
+  }
+});
+
+// وظيفة إغلاق المودال (موجودة عندك لكن للتأكد)
+function contactTelegram(id){
+  const item = listings.find(x => x.id === id);
+  if(!item) return;
+
+  const username = 'AL_Mo7amady';
+  const message = `مرحبا...👋%0Aهل يمكنني الاستفسار عن تلك الوحدة بتفاصيل اكثر...؟!%0A- ${item.title}%0A- المدينة: ${item.city}%0A- المنطقة: ${item.area}%0A- المساحة: ${item.size}%0A- عدد الغرف: ${item.beds}%0A- عدد الحمامات: ${item.baths}%0A- السعر: ${formatPrice(item.price)}`;
+
+  window.open(`https://t.me/${username}?text=${message}`, '_blank');
+}
+function openInquiry(){
+  document.getElementById("inquiry-modal").style.display = "flex";
+}
+
+function closeInquiry(){
+  document.getElementById("inquiry-modal").style.display = "none";
+}
+  </script>
+
+  <!-- fullscreen image viewer -->
+  <div id="fullImgView" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:1400" onclick="this.style.display='none'">
+    <img id="fullImg" style="max-width:92%;max-height:92%;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,0.6)">
+  </div>
+
+<!-- نافذة الاستفسار -->
+<div id="inquiry-modal" class="inquiry-overlay" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.65);
+  backdrop-filter:blur(4px);
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+">
+  <div class="inquiry-box" style="
+    background:rgba(5,15,26,0.92);
+    padding:28px;
+    border-radius:16px;
+    width:340px;
+    border:1px solid rgba(216,178,90,0.35);
+    box-shadow:0 0 15px rgba(216,178,90,0.45);
+  ">
+<h3 style="color:var(--accent);margin-top:0;margin-bottom:18px;font-size:22px;">
+  اترك استفسارك
+</h3>
+
+<form id="inquiryForm" action="https://formspree.io/f/mwpaddor" method="POST">
+
+  <!-- حقل الاسم -->
+  <input type="text" name="name" placeholder="الاسم" required style="
+    width:100%;margin-bottom:10px;padding:10px;border-radius:10px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(6px);
+    color:#c7c7c7;
+  ">
+
+  <!-- حقل الهاتف او البريد -->
+  <input type="text" name="contact" placeholder="رقم الهاتف أو البريد الإلكتروني" required style="
+    width:100%;margin-bottom:10px;padding:10px;border-radius:10px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(6px);
+    color:#c7c7c7;
+  ">
+
+  <!-- حقل كتابة الاستفسار -->
+  <textarea name="message" placeholder="اكتب استفسارك هنا..." required style="
+    width:100%;height:90px;padding:10px;border-radius:10px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(6px);
+    color:#c7c7c7;
+  "></textarea>
+
+  <!-- زر إرسال -->
+  <button type="submit" class="btn-send" style="
+    width:100%;padding:12px;margin-top:8px;border-radius:10px;
+    background:linear-gradient(90deg,#d6b15c,#f7e2a4);
+    color:#061018;font-weight:900;border:0;
+    cursor:pointer;box-shadow:0 0 12px rgba(216,178,90,0.7);
+    font-size:17px;
+  ">إرسال</button>
+</form>
+
+<button class="close-inquiry" onclick="closeInquiry()" style="
+  margin-top:14px;background:none;border:1px solid #fff;
+  color:#fff;padding:6px 20px;border-radius:10px;font-size:14px;
+  cursor:pointer;
+">إغلاق</button>
+  </div>
+</div>
+<!-- Success Message Modal -->
+<div id="successModal" style="
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);
+  display:none;justify-content:center;align-items:center;z-index:999999;
+">
+  <div style="
+    background:rgba(10,20,35,0.85);
+    padding:25px 30px;border-radius:18px;
+    border:1px solid rgba(255,215,130,0.4);
+    box-shadow:0 0 14px rgba(255,215,130,0.5);
+    text-align:center;color:#fff;width:320px;
+  ">
+    <h3 style="margin:0 0 10px;color:#f7d98b;">تم الإرسال بنجاح ✔️</h3>
+
+    <p style="margin:0 0 15px;font-size:15px;line-height:1.7;">
+      سوف يتم الرد قريباً ...<br>
+      فريق عمل <span style="color:#f7d98b;">تيلا</span> يشكركم ❣️
+    </p>
+
+    <button onclick="closeSuccessModal()" style="
+      padding:8px 25px;border-radius:10px;font-size:15px;
+      border:1px solid #f7d98b;background:none;color:#f7d98b;
+      cursor:pointer;
+    ">إغلاق</button>
+  </div>
+</div>
+
+<script>
+function closeSuccessModal(){
+  document.getElementById("successModal").style.display = "none";
+}
+
+// تشغيل فورمسبري عبر AJAX
+const form = document.querySelector('#inquiryForm');
+if(form){
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+
+    const data = new FormData(form);
+
+    await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    form.reset(); // تفريغ الحقول
+    document.getElementById("successModal").style.display = "flex"; // إظهار الرسالة
+  });
+}
+function openMegaDetail(id){
+  const item = listings.find(x => x.id === id);
+  if(!item) return;
+
+  // نستخدم الصور الخاصة بالوحدة
+  const imgs = item.gallery || [item.img];
+
+  const galleryHTML = imgs.map(src => `<img src="${src}" alt="">`).join('');
+
+  const modal = document.getElementById('detailModal');
+  const content = document.getElementById('modalContent');
+
+  content.innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="horizontal-gallery">
+        ${galleryHTML}
+      </div>
+
+      <div style="text-align:right">
+        <h3 style="margin:6px 0;color:var(--accent)">${item.title}</h3>
+        <p class="muted">${item.desc}</p>
+        <p style="font-weight:900;color:var(--accent)">${formatPrice(item.price)}</p>
+
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px">
+          <button class="btn-whatsapp" onclick="contactSeller(${item.id})">احجز وحدتك</button>
+          <div class="modal-content">
+            <button class="existing-close-btn" onclick="closeModal()">إغلاق</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  modal.style.display='flex';
+  modal.setAttribute('aria-hidden','false');
+}
+let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+function toggleFavorite(itemId){
+  const cardEl = document.querySelector(`[data-id='${itemId}']`);
+  const index = favorites.indexOf(itemId);
+  
+  if(index === -1){
+    favorites.push(itemId);
+    cardEl.querySelector('.favorite-btn').classList.add('active');
+  } else {
+    favorites.splice(index,1);
+    cardEl.querySelector('.favorite-btn').classList.remove('active');
+  }
+
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  renderFavoritesDrawer();
+}
+
+// render drawer
+function renderFavoritesDrawer(){
+  const drawer = document.getElementById('favoritesList');
+  drawer.innerHTML = '';
+
+  favorites.forEach(id => {
+    // أولًا حاول تجيب من listings
+    let item = (typeof listings !== 'undefined') ? listings.find(l => l.id === id) : null;
+
+    // لو مش موجود في listings، استخرج من DOM
+    if(!item) {
+      const cardEl = document.querySelector(`.card[data-id='${id}'], .featured-card[data-id='${id}']`);
+      if(cardEl) {
+        const titleEl = cardEl.querySelector('.title, .f-title');
+const priceEl = cardEl.querySelector('.price, .f-price, .f-body .f-price');
+        const thumbEl = cardEl.querySelector('.thumb, .f-thumb');
+
+        item = {
+          id: id,
+          title: titleEl ? titleEl.textContent.trim() : 'بدون عنوان',
+          price: priceEl ? priceEl.textContent.trim() : '',
+          img: thumbEl ? (thumbEl.style.backgroundImage.replace(/url\(|\)|'|"/g, '')) : ''
+        };
+      }
+    }
+
+    if(!item) return; // لو ما قدرناش نجيب بيانات، نتخطى العنصر
+
+    const div = document.createElement('div');
+    div.className = 'favorite-item';
+    div.setAttribute('data-id', id);
+    div.style.cssText = "padding:10px;background:rgba(255,255,255,0.05);border-radius:12px;cursor:pointer;display:flex;gap:10px;align-items:center";
+
+    div.innerHTML = `
+      <div style="width:70px;height:50px;background-size:cover;background-position:center;border-radius:8px;flex-shrink:0;background-image: url('${item.img || ''}');"></div>
+      <div style="flex:1;text-align:right">
+        <strong style="display:block">${item.title}</strong>
+        <div style="margin-top:6px;color:var(--accent);font-weight:900">${item.price || ''}</div>
+      </div>
+      <div style="margin-left:6px">
+        <button class="fav-remove" style="padding:6px 8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;cursor:pointer">إزالة ❤</button>
+      </div>
+    `;
+
+    // عند إزالة من المفضلة من داخل القائمة
+    div.querySelector('.fav-remove').addEventListener('click', (e) => {
+      e.stopPropagation();
+      const idx = favorites.indexOf(id);
+      if(idx > -1) favorites.splice(idx, 1);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      updateFavoriteButtons();
+      renderFavoritesDrawer();
+    });
+
+    // عند الضغط على العنصر نفسه افتح التفاصيل
+    div.addEventListener('click', () => {
+      if (typeof openDetail === 'function') openDetail(id);
+      if (typeof closeFavoritesDrawer === 'function') closeFavoritesDrawer();
+    });
+
+    drawer.appendChild(div);
+  });
+}
+
+// toggle drawer
+const favToggle = document.getElementById('favoritesToggle');
+const favDrawer = document.getElementById('favoritesDrawer');
+
+favToggle.addEventListener('click', () => {
+  favDrawer.style.right = favDrawer.style.right === '0px' ? '-350px' : '0';
+});
+
+function closeFavoritesDrawer() {
+  favDrawer.style.right = '-350px';
+}
+
+// Toggle favorite function
+
+// تحديث كل أزرار القلب حسب المفضلة
+function updateFavoriteButtons() {
+  document.querySelectorAll('.favorite-btn').forEach(btn => {
+    const card = btn.closest('.card, .featured-card');
+    const id = parseInt(card.dataset.id);
+    if (favorites.includes(id)) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+}
+
+// أضف زر القلب لكل بطاقة
+function addFavoriteButtons() {
+  document.querySelectorAll('.card, .featured-card').forEach(card => {
+    const id = parseInt(card.dataset.id);
+    if (card.querySelector('.favorite-btn')) return; // منع التكرار
+    const btn = document.createElement('div');
+    btn.className = 'favorite-btn';
+    btn.innerHTML = '❤';
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      toggleFavorite(id);
+    };
+    card.appendChild(btn);
+  });
+}
+
+// بعد عرض البطاقات
+renderListings(listings);
+addFavoriteButtons();
+updateFavoriteButtons();
+renderFavoritesDrawer();
+</script>
+</body>
+</html>
